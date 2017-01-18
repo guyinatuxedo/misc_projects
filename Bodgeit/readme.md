@@ -200,7 +200,7 @@ The q variable reads the hidden element
 The function below that parses the input, and then replaces certain characters that we need to hack it
 
 
-.) 
+:) 
 Next let’s try to impersonate a user! First you are going to need a user account, whether it be the one it gives you or one you made on the spot. Then sign in, and make sure that it remembers your credentials. Now comes the fun part. Fire up Cookie Editor and filter the cookies using the ip address 
 
 
