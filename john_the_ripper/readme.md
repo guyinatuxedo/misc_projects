@@ -1,15 +1,15 @@
 John the Ripper
 
 
-How does it work?
+#How does it work?
 
 
 John the Ripper (JTR) is a password cracking tool. It is available for OSX, Linux, and Windows. It was originally designed to crack Unix passwords, but now it can crack things such as passwords for zip files. In order to use JTR you need the password hash. A hash is a string of text that has been ran through a hashing algorithm. A hashing algorithm has to meet the two following requirements theoretically.
 
-
+```
 Password hashes cannot be reversed
 For every input, there is exactly one output
-
+```
 
 If the algorithm meets those two requirements, then it should be a hashing algorithm. Since the hash cannot be reversed, that means if the authentication server is hacked and all of the hashes are leaked then you shouldn’t be able to reverse the hash back to the original password, thus the password remains safe. Secondly since there is only one output for every input, you have to input the right password to get the right hash which will allow for correct authentication.
 
@@ -32,14 +32,14 @@ Incremental: In this mode it will try all possible string combinations. It will 
 Keep in mind that this is just the default settings. You can edit and change this to fit your specific needs.
 
 
-Installation
+#Installation
 
 
 This will cover how to install it on Ubuntu. To install it on other platforms, refer to google. You can install either the basic edition, or the community enhanced edition which comes with special features. To install JTR basic edition run the following command.
 
-
-“sudo apt-get install john”
-
+```
+sudo apt-get install john
+```
 
 Now to install the community enhanced edition, it is a bit more involved. You can either download the .tar.gz (or other system compatible file, however the setup might be different) from either the main website (listed below) or from my github.
 
@@ -49,36 +49,36 @@ http://www.openwall.com/john/
 
 First navigate to the directory that the .tar.gz file is stored in using the “cd” command followed by the file path. After that, you can extract the file with the following command.
 
-
-“tar -xvzf john-1.8.0-jumbo-1.tar.gz”
-
+```
+tar -xvzf john-1.8.0-jumbo-1.tar.gz
+```
 
 After that a new folder will be created called “john-1.8.0-jumbo-1”. You will need to enter that directory with the following command.
 
-
-“cd john-1.8.0-jumbo-1”
-
+```
+cd john-1.8.0-jumbo-1
+```
 
 Now this package comes with a wealth of documentation from operation to flags. You can just refer to the Install instructions that reside at “john-1.8.0-jumbo-1/doc/INSTALL” with nano (a basic text editor) using the following command (provided you ran the previous). Attached in the github you will find a copy of the “INSTALL” file, just incase for whatever reason it disappeared.
 
-
-“sudo nano doc/INSTALL”
-
+```
+sudo nano doc/INSTALL
+```
 
 Usage Example 1
 
 
 To start off with the Ubuntu example, first we need to get the password hash. With the modern versions of Ubuntu, passwords are stored in a file located at “/etc/shadow”. To view this file type in the following command.
 
-
-“sudo cat /etc/shadow”
-
+```
+sudo cat /etc/shadow
+```
 
 From here you will see a list of every user on your system, including daemons. You can create a new user to do this with (and preferably give it a week password). But for this example we will be working with a user named “test” with the following information from the shadow file.
 
-
-“test:$6$jlNTBb4A$Ejy1eguZIC1POEaSCJUNzLOGK0DxLXcwI1L1LDbZBWD3cI5pl3ql3KSHWH8vpA0fMexScdEHPCkB/9Ay8xYh5.:17110:1:30:7:::”
-
+```
+test:$6$jlNTBb4A$Ejy1eguZIC1POEaSCJUNzLOGK0DxLXcwI1L1LDbZBWD3cI5pl3ql3KSHWH8vpA0fMexScdEHPCkB/9Ay8xYh5.:17110:1:30:7:::
+```
 
 Now in reality it isn’t colored like that. However I color coded it so you can better understand the individual components of this.
 
@@ -102,49 +102,48 @@ Now that we have covered the parts of a “shadow” hash, it is time to break i
 
 Now that we have the password in a file, we can try to run JTR. To do so on this file run the following command.
 
-
-“Sudo john passwords”
-
+```
+sudo john passwords
+```
 
 Now after a second it comes back with this success message.
 
-
+```
 Loaded 1 password hash (crypt, generic crypt(3) [?/64])
 No password hashes left to crack (see FAQ)
-
+```
 
 Now to see all of the cracked hashes from a file, you can use the following command. 
 
+```
+john passwords --show
+```
 
-“john passwords --show”
+And this is the output. 
 
-
-And this is the output. The part that is highlighted red is the password.
-
-
+```
 ?:Test305555
 
-
 1 password hash cracked, 0 left
-
+```
 
 Now let’s say you have an idea of what the password is, or you have a better word list for your purposes besides what comes default with JTR. You can instruct JTR to use a specific word list versus the default. To do that you will just need to add an additional flag. There is an example command below, the file that has the hash is called ”wordlist_passwords” and the file that has the new wordlist is named “list”.
 
-
-“john --wordlist=list wordlist_passwords”
-
+```
+john --wordlist=list wordlist_passwords
+```
 
 And we can see from checking the file it has found and decoded the hash.
 
-
-“john --show wordlist_passwords”
-
-
+```
+john --show wordlist_passwords
+```
+```
 test1:TaiFood:17110:1:30:7:::
 
 
 1 password hash cracked, 0 left
-
+```
 
 Now keep in mind, this write up only covers a small part of what JTR can do. 
 
