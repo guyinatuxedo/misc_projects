@@ -17,6 +17,5 @@ guy
 ```
 
 Result:
-```
 decisions**guy**madeforme
-```
+
