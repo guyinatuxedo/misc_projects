@@ -109,7 +109,27 @@ Result:
 1 3 3 0
 ```
 
-#### 3.) Quantifies
+#### 3.) Optional Quantifies
 
-White regex, you can specify how many times you will want a string. This c
+With Regex you can specify if a string is optional by putting a "?" in front of it. This string before it will be included if possible. Keep in mind that if you put it infornt of just a text character, it will only treat the first character behind it as optional
 
+String:
+```
+guyin guyina  guyinat guinau  guyinatux
+```
+
+Regex:
+```
+guyinat?u?x?
+```
+
+Result:
+```
+guyina  guyinat guyinatu  guyinatux
+```
+
+You can also specify that something is optional, and to exclude it if possible. To do this use two question marks ("??").
+
+```
+
+```
